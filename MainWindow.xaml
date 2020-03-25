@@ -5,23 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flightGear"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Flight Gear" Height="450" Width="800">
+    <Grid Background="LightBlue">
         <Grid.RowDefinitions>
+            <!--top border-->
+            <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <!--bottom border-->
+            <RowDefinition Height="20"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <!--left border-->
+            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <!--middle border between map and knob-->
+            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <!--right border-->
+            <ColumnDefinition Width="20"/>
+            
+            
         </Grid.ColumnDefinitions>
 
+
+
+
         
-        <!--adding map view-->
-        <Button>Button 1</Button>
-        <Button Grid.Column="2" Grid.RowSpan="2">Button 2</Button>
-        <Button Grid.ColumnSpan="3">Button 3</Button>
+        <!--Grid Grid.Column="5" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+        </-->
         
         
     </Grid>

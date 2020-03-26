@@ -6,16 +6,21 @@
              xmlns:local="clr-namespace:flightGear.views"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" Grid.Row="1" ZoomLevel="12" Center="32.005500,34.885400">
+        <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" Grid.Row="1" ZoomLevel="8" Center="32.005500,34.885400">
             <Canvas
-        m:MapLayer.Position="32.005500,34.885400"
-        m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30"
-        >
+             m:MapLayer.Position="32.005500,34.885400"
+             m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
                 
             </Canvas>
+            
+            <Image Source="C:\Users\Tomer\source\repos\flightGear\resources\plane.png" RenderOptions.BitmapScalingMode="Fant"
+             Stretch="Fill"
+             Width="64"
+             Height="64"/>
         </m:Map>
     </Grid>
 </UserControl>

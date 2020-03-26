@@ -42,5 +42,16 @@
         <Label Grid.Row ="6" Grid.Column="0" Content="_Pitch:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Grid.Row ="7" Grid.Column="0" Content="_Altimeter:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
        
+        
+        <!--labels for data recieved from server-->
+        <Label Name="heading" Grid.Row ="0" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="vspeed" Grid.Row ="1" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="gpsgspeed" Grid.Row ="2" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="airspeed" Grid.Row ="3" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="gpsalt" Grid.Row ="4" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="roll" Grid.Row ="5" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="pitch" Grid.Row ="6" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="altimeter" Grid.Row ="7" Grid.Column="1" Content="" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
     </Grid>
 </UserControl>

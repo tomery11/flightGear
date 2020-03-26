@@ -58,15 +58,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="views\Joystick.xaml.cs">
+      <DependentUpon>Joystick.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\dashboard.xaml.cs">
       <DependentUpon>dashboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\joystick.xaml.cs">
-      <DependentUpon>joystick.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\map.xaml.cs">
       <DependentUpon>map.xaml</DependentUpon>
     </Compile>
+    <Page Include="views\Joystick.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,10 +84,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="views\dashboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\joystick.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,7 +122,9 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="models\" />
     <Folder Include="server\" />
+    <Folder Include="viewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

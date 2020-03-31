@@ -58,11 +58,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="models\IFlightGearModel.cs" />
+    <Compile Include="models\ITelnetClient.cs" />
+    <Compile Include="models\MyDashboardModel.cs" />
+    <Compile Include="models\MyTelnetClient.cs" />
     <Compile Include="views\dashboard.xaml.cs">
       <DependentUpon>dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\Joystick.xaml.cs">
+      <DependentUpon>Joystick.xaml</DependentUpon>
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
     <Compile Include="views\map.xaml.cs">
       <DependentUpon>map.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\steer.xaml.cs">
+      <DependentUpon>steer.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -80,7 +91,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="views\Joystick.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="views\map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\steer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,7 +134,6 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="models\" />
     <Folder Include="server\" />
     <Folder Include="viewModels\" />
   </ItemGroup>

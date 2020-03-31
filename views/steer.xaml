@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="flightGear.views.steer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:flightGear.views"
+             xmlns:views="clr-namespace:flightGear.views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DockPanel>
+            <Viewbox DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" FontSize="24" Text="---Value---">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="90"/>
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                    <Slider x:Name="align"  Orientation="Vertical" Margin="25"
+                    Background="Gray" Width="20" Height="300" Maximum="100" Minimum="0">
+
+                    </Slider>
+                    <TextBlock VerticalAlignment="Center" FontSize="24" Text="---Alignment---">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="90"/>
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                </StackPanel>
+                
+            </Viewbox>
+
+            <Viewbox DockPanel.Dock="Bottom">
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center" FontSize="24" Text="---Throttle---">
+
+                    </TextBlock>
+                    <Slider x:Name="throttle"   Margin="25"
+                    Background="Gray" Width="300" Height="20" Maximum="100" Minimum="0">
+
+                    </Slider>
+                   
+                    <TextBlock HorizontalAlignment="Center" FontSize="24" Text="---Value---">
+
+                    </TextBlock>
+                </StackPanel>
+               
+            </Viewbox>
+           
+            <views:Joystick/>
+        </DockPanel> 
+    </Grid>
+</UserControl>

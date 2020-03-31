@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:flightGear.views"
         mc:Ignorable="d"
         Title="Flight Gear" Height="450" Width="800">
-    <Grid Margin="10">
+    <Grid Margin="10" Background="LightBlue">
         <Grid.RowDefinitions>
 
             <RowDefinition Height="*"/>
@@ -22,18 +22,18 @@
         </Grid.ColumnDefinitions>
 
 
-        <views:map Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2"/>
+        <views:map Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2" Margin="15"/>
 
         
 
 
-        <Viewbox Grid.Row="0" Grid.Column="1">
+        <Viewbox Grid.Row="0" Grid.Column="1" Margin="15">
             <views:dashboard/>
 
         </Viewbox>
 
-        <Viewbox Grid.Row="1" Grid.Column="1">
-            
+        <Viewbox Grid.Row="1" Grid.Column="1" Margin="15">
+            <views:steer />
 
         </Viewbox>
 

@@ -13,18 +13,88 @@ namespace flightGear.models
 
         ITelnetClient telnetClient;
         volatile Boolean stop;
+        private double heading;
+        private double verticalSpeed;
+        private double groundSpeed;
+        private double airSpeed;
+        private double gpsAltitude;
+        private double roll;
+        private double pitch;
+        private double altimeterAltitude;
 
-        public double Heading { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double VerticalSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double GroundSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double AirSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double GpsAltitude { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double Roll { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double Pitch { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double AltimeterAltitude { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double Heading
+        {
+            get { return heading; }
+            set
+            {
+                heading = value;
+                NotifyPropertyChanged("Heading");
+            }
+        }
+        public double VerticalSpeed {
+            get { return verticalSpeed; }
+            set
+            {
+                verticalSpeed = value;
+                NotifyPropertyChanged("VerticalSpeed");
+            }
+        }
+        public double GroundSpeed {
+            get { return groundSpeed; }
+            set
+            {
+                groundSpeed = value;
+                NotifyPropertyChanged("GroundSpeed");
+            }
+        }
+        public double AirSpeed {
+            get { return airSpeed; }
+            set
+            {
+                airSpeed = value;
+                NotifyPropertyChanged("AirSpeed");
+            }
+        }
+        public double GpsAltitude {
+            get { return gpsAltitude; }
+            set
+            {
+                gpsAltitude = value;
+                NotifyPropertyChanged("GpsAltitude");
+            }
+        }
+        public double Roll {
+            get { return roll; }
+            set
+            {
+                roll = value;
+                NotifyPropertyChanged("Roll");
+            }
+        }
+        public double Pitch {
+            get { return pitch; }
+            set
+            {
+                pitch = value;
+                NotifyPropertyChanged("Pitche");
+            }
+        }
+        public double AltimeterAltitude {
+            get { return altimeterAltitude; }
+            set
+            {
+                altimeterAltitude = value;
+                NotifyPropertyChanged("AltimeterAltitude");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
         public MyDashboardModel(ITelnetClient telnetClient)
         {
             this.telnetClient = telnetClient;
@@ -52,6 +122,7 @@ namespace flightGear.models
             {
                 while (!stop)
                 {
+                    // this part will update the board with all the clocks
                     //heading update
                     telnetClient.write("/instrumentation/heading-indicator/indicated-heading-deg");
                     Heading = Double.Parse(telnetClient.read());

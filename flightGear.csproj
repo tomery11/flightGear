@@ -62,6 +62,7 @@
     <Compile Include="models\ITelnetClient.cs" />
     <Compile Include="models\MyDashboardModel.cs" />
     <Compile Include="models\MyTelnetClient.cs" />
+    <Compile Include="viewModels\FlightGearViewModel.cs" />
     <Compile Include="views\dashboard.xaml.cs">
       <DependentUpon>dashboard.xaml</DependentUpon>
     </Compile>
@@ -135,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="server\" />
-    <Folder Include="viewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\plane.png" />

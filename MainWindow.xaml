@@ -36,7 +36,7 @@
 
             </StackPanel>
         </Border>
-        <Border Margin="5,5,0,5" Grid.Row="1"  Grid.Column="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
+        <Border Margin="30" Grid.Row="1"  Grid.Column="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
             <views:map  />
         </Border>
 

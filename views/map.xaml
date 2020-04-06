@@ -3,26 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
              xmlns:local="clr-namespace:flightGear.views"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="plane_icon" TargetType="m:Pushpin">
+            <Grid>
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="../resources/plane.png"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid>
         <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" Grid.Row="1" ZoomLevel="8" Center="32.005500,34.885400">
             <Canvas
              m:MapLayer.Position="32.005500,34.885400"
              m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
-                <m:Pushpin Location="32.005500,34.885400" />
+
             </Canvas>
-            
-            <Image Source="C:\Users\Tomer\source\repos\flightGear\resources\plane.png" RenderOptions.BitmapScalingMode="Fant"
-             Stretch="Fill"
-             Width="64"
-             Height="64"/>
+            <m:Pushpin  Location="32.005500,34.885400" Template="{StaticResource plane_icon}"/>
+
+
         </m:Map>
+
         
     </Grid>
-    
+
 </UserControl>

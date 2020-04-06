@@ -7,43 +7,63 @@
              xmlns:views="clr-namespace:flightGear.views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid >
         <DockPanel>
-            <Viewbox DockPanel.Dock="Left">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" FontSize="24" Text="---Value---">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform Angle="90"/>
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
-                    <Slider x:Name="align"  Orientation="Vertical" Margin="25"
-                    Background="Gray" Width="20" Height="300" Maximum="100" Minimum="0">
+            <Viewbox DockPanel.Dock="Left" Width="140">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" FontSize="24" Text="Throttle" FontWeight="bold">
+                            <TextBlock.LayoutTransform>
+                                <RotateTransform Angle="90"/>
+                            </TextBlock.LayoutTransform>
+                        </TextBlock>
+                        <Slider x:Name="align"  Orientation="Vertical" Margin="10"
+                     Width="20" Height="300" Maximum="100" Minimum="0">
 
-                    </Slider>
-                    <TextBlock VerticalAlignment="Center" FontSize="24" Text="---Alignment---">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform Angle="90"/>
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
+                        </Slider>
+
+                    </StackPanel>
+                    <TextBlock Text="vaule" HorizontalAlignment="Center" FontSize="19"/>
                 </StackPanel>
+                    
+               
                 
             </Viewbox>
 
-            <Viewbox DockPanel.Dock="Bottom">
-                <StackPanel>
-                    <TextBlock HorizontalAlignment="Center" FontSize="24" Text="---Throttle---">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top" Height="100" Margin="0,0,0,50">
+                <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Rudder---" Margin="0,0,80,0"/>
+                <TextBlock HorizontalAlignment="Center" FontSize="36" Text="value"/>
 
-                    </TextBlock>
-                    <Slider x:Name="throttle"   Margin="25"
-                    Background="Gray" Width="300" Height="20" Maximum="100" Minimum="0">
+            </StackPanel>
 
-                    </Slider>
-                   
-                    <TextBlock HorizontalAlignment="Center" FontSize="24" Text="---Value---">
+            <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Right" Width="100" >
+                <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Elevator---" Margin="0,0,0,100">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="90"/>
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+                <TextBlock FontSize="36" Text="value" />
+            </StackPanel>
 
-                    </TextBlock>
+            <Viewbox DockPanel.Dock="Bottom" Height="140" Margin="0,20,0,0">
+                <StackPanel >
+                    <StackPanel Orientation="Horizontal">
+
+                        <Slider x:Name="throttle"   Margin="10"
+                     Width="300" Height="20" Maximum="100" Minimum="0"  >
+
+
+                        </Slider>
+
+
+                        <TextBlock HorizontalAlignment="Center" FontSize="19" Text="value"/>
+                        
+
+                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Center" FontSize="24" Text="Aileron" FontWeight="bold" VerticalAlignment="Bottom" />
                 </StackPanel>
-               
+                
+                
             </Viewbox>
            
             <views:Joystick/>

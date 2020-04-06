@@ -12,13 +12,14 @@ namespace flightGear.models
     {
         TcpClient tcpclnt;
         NetworkStream stream;
-        const int PORT_NO = 5000;
-        const string SERVER_IP = "127.0.0.1";
+        const int PORT_NO = 5402;
+        const string SERVER_IP = "localhost";
 
         public MyTelnetClient()
         {
+            Console.WriteLine("MytelnetClient constructor");
             this.tcpclnt = new TcpClient();
-            this.stream = tcpclnt.GetStream();
+            //this.stream = tcpclnt.GetStream();
         }
 
 
@@ -70,10 +71,13 @@ namespace flightGear.models
         {
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
 
+
+            this.stream = tcpclnt.GetStream();
+
             // Get a client stream for reading and writing.
             //  Stream stream = client.GetStream();
 
-            
+
 
             // Send the message to the connected TcpServer. 
             stream.Write(data, 0, data.Length);

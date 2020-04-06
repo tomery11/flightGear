@@ -7,35 +7,57 @@
         xmlns:views="clr-namespace:flightGear.views"
         mc:Ignorable="d"
         Title="Flight Gear" Height="450" Width="800">
-    <Grid Margin="10" Background="LightBlue">
+    <Grid Background="DimGray">
         <Grid.RowDefinitions>
-
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.4*"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2.2*"/>
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
 
+        <Border BorderBrush="Black" BorderThickness="2" Margin="5,10,5,0" CornerRadius="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <StackPanel  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="White">
 
-        <views:map Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2" Margin="15"/>
+                <Label Content="IP:" Margin="0,0,3,0"/>
+                <TextBox Background="White" Width="100" Margin="0,0,3,0" Height="18"/>
+                <Label Content="Port:" Margin="0,0,3,0"/>
+                <TextBox Background="White" Width="80" Margin="0,0,30,0" Height="18"/>
+                <Button Content="Connect" Margin="0,0,10,0" Height="20" Width="100" />
+                <Button Content="Disconnect" Margin="0,0,10,0" Height="20" Width="100" />
+                <Label Content="Status:" Margin="1"/>
+                <Label Content="the status will be updated here" Margin="0,0,10,0"/>
 
-        
+
+            </StackPanel>
+        </Border>
+        <Border Margin="5,5,0,5" Grid.Row="1"  Grid.Column="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
+            <views:map  />
+        </Border>
 
 
-        <Viewbox Grid.Row="0" Grid.Column="1" Margin="15">
-            <views:dashboard/>
 
-        </Viewbox>
 
-        <Viewbox Grid.Row="1" Grid.Column="1" Margin="15">
-            <views:steer />
+        <Border Grid.Row="1" Grid.Column="1" Margin="15"  BorderThickness="2" BorderBrush="Black" CornerRadius="3">
+            <Viewbox>
+                <views:dashboard/>
 
-        </Viewbox>
+            </Viewbox>
+        </Border>
+
+
+        <Border Grid.Row="2" Grid.Column="1" Margin="20" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
+            <Viewbox >
+                <views:steer />
+
+            </Viewbox>
+        </Border>
+       
 
        
 

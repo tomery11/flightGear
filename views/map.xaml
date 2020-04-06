@@ -14,7 +14,7 @@
             <Canvas
              m:MapLayer.Position="32.005500,34.885400"
              m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
-                
+                <m:Pushpin Location="32.005500,34.885400" />
             </Canvas>
             
             <Image Source="C:\Users\Tomer\source\repos\flightGear\resources\plane.png" RenderOptions.BitmapScalingMode="Fant"
@@ -22,5 +22,7 @@
              Width="64"
              Height="64"/>
         </m:Map>
+        
     </Grid>
+    
 </UserControl>

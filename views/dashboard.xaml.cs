@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using flightGear.models;
+using flightGear.viewModels;
 namespace flightGear.views
 {
     /// <summary>
@@ -20,9 +21,11 @@ namespace flightGear.views
     /// </summary>
     public partial class dashboard : UserControl
     {
+        
         public dashboard()
         {
             InitializeComponent();
+            
         }
     }
 }

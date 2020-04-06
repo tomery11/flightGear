@@ -107,6 +107,7 @@ namespace flightGear.models
         public void connect(string ip, int port)
         {
             telnetClient.connect(ip, port);
+            start();
             
         }
 
@@ -146,6 +147,7 @@ namespace flightGear.models
                     Pitch = Double.Parse(telnetClient.read());
                     //AltimeterAltitude update
                     telnetClient.write("/instrumentation/altimeter/indicated-altitude-ft");
+                    //Console.WriteLine(Double.Parse(telnetClient.read()));
                     AltimeterAltitude = Double.Parse(telnetClient.read());
 
                     Thread.Sleep(250);

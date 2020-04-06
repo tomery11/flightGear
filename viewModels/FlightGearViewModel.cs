@@ -23,10 +23,6 @@ namespace flightGear.viewModels
                     NotifyPropertyChanged("VM_" + e.PropertyName);
                 };
 
-
-
-
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

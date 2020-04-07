@@ -17,9 +17,9 @@ namespace flightGear.models
 
         public MyTelnetClient()
         {
-            Console.WriteLine("MytelnetClient constructor");
+            
             this.tcpclnt = new TcpClient();
-            //this.stream = tcpclnt.GetStream();
+            
         }
 
 
@@ -31,9 +31,14 @@ namespace flightGear.models
                 Console.WriteLine("Connecting.....");
 
                 tcpclnt.Connect(SERVER_IP, PORT_NO);
+
                 Console.WriteLine("Connected");
+                this.stream = tcpclnt.GetStream();
+
             }
-            
+
+
+
             catch (ArgumentNullException e)
             {
                 Console.WriteLine("ArgumentNullException: {0}", e);
@@ -42,6 +47,7 @@ namespace flightGear.models
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
+
         }
 
         public void disconnect()
@@ -52,19 +58,19 @@ namespace flightGear.models
 
         public string read()
         {
+            byte[] buffer = new byte[tcpclnt.ReceiveBufferSize];
             
+            //---read incoming stream---
+            int bytesRead = stream.Read(buffer, 0, tcpclnt.ReceiveBufferSize);
 
-            // Buffer to store the response bytes.
-            Byte[] data = new Byte[256];
+            //---convert the data received into a string---
+            string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            Console.WriteLine("Received : " + dataReceived);
 
-            // String to store the response ASCII representation.
-            String responseData = String.Empty;
-
-            // Read the first batch of the TcpServer response bytes.
-            Int32 bytes = stream.Read(data, 0, data.Length);
-            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-            Console.WriteLine("Received: {0}", responseData);
-            return responseData;
+            //---write back the text to the client---
+            
+            Console.WriteLine("Received: {0}", dataReceived);
+            return dataReceived;
         }
 
         public void write(string command)
@@ -72,7 +78,7 @@ namespace flightGear.models
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
 
 
-            this.stream = tcpclnt.GetStream();
+            //this.stream = tcpclnt.GetStream();
 
             // Get a client stream for reading and writing.
             //  Stream stream = client.GetStream();
@@ -81,7 +87,7 @@ namespace flightGear.models
 
             // Send the message to the connected TcpServer. 
             stream.Write(data, 0, data.Length);
-
+            
             Console.WriteLine("Sent: {0}", command);
         }
 

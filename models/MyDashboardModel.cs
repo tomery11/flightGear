@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace flightGear.models
 {
@@ -21,6 +22,11 @@ namespace flightGear.models
         private double roll;
         private double pitch;
         private double altimeterAltitude;
+        private double rudder;
+        private double elevator;
+        private double aileron;
+        private double throttle;
+        private Location location;
 
         public double Heading
         {
@@ -76,7 +82,7 @@ namespace flightGear.models
             set
             {
                 pitch = value;
-                NotifyPropertyChanged("Pitche");
+                NotifyPropertyChanged("Pitch");
             }
         }
         public double AltimeterAltitude {
@@ -85,6 +91,46 @@ namespace flightGear.models
             {
                 altimeterAltitude = value;
                 NotifyPropertyChanged("AltimeterAltitude");
+            }
+        }
+
+        
+        public double Rudder {
+            get { return rudder; } 
+            set { rudder = value;
+                NotifyPropertyChanged("Rudder");
+            } 
+        }
+        public double Elevator {
+            get { return elevator; }
+            set
+            {
+                elevator = value;
+                NotifyPropertyChanged("elevator");
+            }
+        }
+        public double Aileron {
+            get { return aileron; }
+            set
+            {
+                aileron = value;
+                NotifyPropertyChanged("Aileron");
+            }
+        }
+        public double Throttle {
+            get { return throttle; }
+            set
+            {
+                throttle = value;
+                NotifyPropertyChanged("Throttle");
+            }
+        }
+        public Location Location {
+            get { return location; }
+            set
+            {
+                location = value;
+                NotifyPropertyChanged("Location");
             }
         }
 
@@ -125,30 +171,38 @@ namespace flightGear.models
                 {
                     // this part will update the board with all the clocks
                     //heading update
-                    telnetClient.write("/instrumentation/heading-indicator/indicated-heading-deg");
-                    Heading = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/heading-indicator/indicated-heading-deg\n");
+                    Heading = Math.Round(Double.Parse(telnetClient.read()),2);
+                    
+               
                     //VerticalSpeed update
-                    telnetClient.write("/instrumentation/gps/indicated-vertical-speed");
-                    VerticalSpeed = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/gps/indicated-vertical-speed\n");
+                    VerticalSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //GroundSpeed update
-                    telnetClient.write("/instrumentation/gps/indicated-ground-speed-kt");
-                    GroundSpeed = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/gps/indicated-ground-speed-kt\n");
+                    GroundSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //AirSpeed update
-                    telnetClient.write("/instrumentation/airspeed-indicator/indicated-speed-kt");
-                    AirSpeed = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/airspeed-indicator/indicated-speed-kt\n");
+                    AirSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //GpsAltitude update
-                    telnetClient.write("/instrumentation/gps/indicated-altitude-ft");
-                    GpsAltitude = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/gps/indicated-altitude-ft\n");
+                    GpsAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //Roll update
-                    telnetClient.write("/instrumentation/attitude-indicator/internal-roll-deg");
-                    Roll = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/attitude-indicator/internal-roll-deg\n");
+                    Roll = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //Pitch update
-                    telnetClient.write("/instrumentation/attitude-indicator/internal-pitch-deg");
-                    Pitch = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/attitude-indicator/internal-pitch-deg\n");
+                    Pitch = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //AltimeterAltitude update
-                    telnetClient.write("/instrumentation/altimeter/indicated-altitude-ft");
-                    //Console.WriteLine(Double.Parse(telnetClient.read()));
-                    AltimeterAltitude = Double.Parse(telnetClient.read());
+                    telnetClient.write("get /instrumentation/altimeter/indicated-altitude-ft\n");
+                    AltimeterAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
+                    // get longtitude
+                    telnetClient.write("get /position/longitude-deg\n");
+                    double longtitude = double.Parse(this.telnetClient.read());
+                    // get altitude
+                    telnetClient.write("get /position/latitude-deg\n");
+                    double latitude = double.Parse(this.telnetClient.read());
+                    Location = new Location(latitude, longtitude);
 
                     Thread.Sleep(250);
                 }

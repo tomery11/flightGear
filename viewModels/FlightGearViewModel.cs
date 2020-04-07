@@ -1,4 +1,5 @@
 ﻿using flightGear.models;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,6 +76,43 @@ namespace flightGear.viewModels
         {
             get { return model.AltimeterAltitude; }
             
+        }
+
+        public double VM_Rudder
+        {
+            get { return model.Rudder; }
+        }
+
+        public double VM_Elevator
+        {
+            get { return model.Elevator; }
+        }
+
+        public double VM_Aileron
+        {
+            get { return model.Aileron; }
+        }
+
+        public double VM_Throttle
+        {
+            get { return model.Throttle; }
+        }
+
+        public Location VM_Location
+        {
+            get { return model.Location; }
+        }
+
+        public void connect()
+        {
+
+            model.connect("localhost", 5402);
+        }
+
+        public bool disconnect()
+        {
+            model.disconnect();
+            return true;
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Microsoft.Maps.MapControl.WPF;
+using System.Threading;
 
 namespace flightGear.models
 {
@@ -25,6 +27,14 @@ namespace flightGear.models
         double Roll { set; get; }
         double Pitch { set; get; }
         double AltimeterAltitude { set; get; }
+
+        double Rudder { set; get; }
+        double Elevator { set; get; }
+        double Aileron { set; get; }
+        double Throttle { set; get; }
+        Location Location { get; set; }
+        
+        
 
 
     }

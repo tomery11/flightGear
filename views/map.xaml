@@ -22,13 +22,13 @@
         </ControlTemplate>
     </UserControl.Resources>
     <Grid>
-        <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" Grid.Row="1" ZoomLevel="8" Center="32.005500,34.885400">
+        <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" Grid.Row="1" ZoomLevel="6" Center="32.005500,34.885400">
             <Canvas
-             m:MapLayer.Position="32.005500,34.885400"
+             m:MapLayer.Position="{Binding Path=VM_Location}"
              m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
 
             </Canvas>
-            <m:Pushpin  Location="32.005500,34.885400" Template="{StaticResource plane_icon}"/>
+            <m:Pushpin  Location="{Binding Path=VM_Location}" Template="{StaticResource plane_icon}"/>
 
 
         </m:Map>

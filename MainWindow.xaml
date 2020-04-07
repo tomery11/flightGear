@@ -12,6 +12,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="40"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,18 +26,20 @@
             <StackPanel  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="White">
 
                 <Label Content="IP:" Margin="0,0,3,0"/>
-                <TextBox Background="White" Width="100" Margin="0,0,3,0" Height="18"/>
+                <TextBox Text="localhost" Background="White" Width="100" Margin="0,0,3,0" Height="18"/>
                 <Label Content="Port:" Margin="0,0,3,0"/>
-                <TextBox Background="White" Width="80" Margin="0,0,30,0" Height="18"/>
-                <Button Content="Connect" Margin="0,0,10,0" Height="20" Width="100" />
-                <Button Content="Disconnect" Margin="0,0,10,0" Height="20" Width="100" />
+                <TextBox Text="5402" Background="White" Width="80" Margin="0,0,30,0" Height="18"/>
+                <Button x:Name="connectButton" Click="connectButton_Click" Content="Connect" Margin="0,0,10,0" Height="20" Width="100" />
+                <Button x:Name="disconnectButton" Click="disconnectButton_Click" Content="Disconnect" Margin="0,0,10,0" Height="20" Width="100" />
                 <Label Content="Status:" Margin="1"/>
-                <Label Content="the status will be updated here" Margin="0,0,10,0"/>
-
+                <Label x:Name="connectionStatus" Content="Disconnected" Foreground="red" FontWeight="Bold" Margin="0,0,10,0" />
+                <Ellipse x:Name="elipseConnectionStatus" Width="10" Height="10" Fill="Red"/>
 
             </StackPanel>
         </Border>
-        <Border Margin="30" Grid.Row="1"  Grid.Column="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
+        
+        <Border Margin="20" Grid.Row="1"  Grid.Column="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
+            
             <views:map  />
         </Border>
 
@@ -57,8 +60,11 @@
 
             </Viewbox>
         </Border>
-       
 
+        <Border Margin="20,0,20,5" Grid.Row="3" Grid.Column="0" BorderThickness="2" BorderBrush="White" CornerRadius="2">
+            <Label Content="Error" HorizontalAlignment="Center" FontSize="10"/>
+        </Border>
+        
        
 
     </Grid>

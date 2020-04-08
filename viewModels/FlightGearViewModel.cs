@@ -103,10 +103,10 @@ namespace flightGear.viewModels
             get { return model.Location; }
         }
 
-        public void connect()
+        public void connect(string ip, int port)
         {
 
-            model.connect("localhost", 5402);
+            model.connect(ip, port);
         }
 
         public bool disconnect()

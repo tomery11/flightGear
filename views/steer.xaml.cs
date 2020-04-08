@@ -24,5 +24,15 @@ namespace flightGear.views
         {
             InitializeComponent();
         }
+
+        private void Throttle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            (sender as Slider).Value = Math.Round(e.NewValue, 2);
+        }
+
+        private void Aileron_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            (sender as Slider).Value = Math.Round(e.NewValue, 2);
+        }
     }
 }

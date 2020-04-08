@@ -17,13 +17,13 @@
                                 <RotateTransform Angle="90"/>
                             </TextBlock.LayoutTransform>
                         </TextBlock>
-                        <Slider x:Name="align"  Orientation="Vertical" Margin="10"
-                     Width="20" Height="300" Maximum="100" Minimum="0">
+                        <Slider x:Name="throttle"  Orientation="Vertical" Margin="10"
+                     Width="20" Height="300" Maximum="1" Minimum="0" ValueChanged="Throttle_ValueChanged">
 
                         </Slider>
 
                     </StackPanel>
-                    <TextBlock Text="vaule" HorizontalAlignment="Center" FontSize="19"/>
+                    <TextBlock x:Name="throttleValue" Text="{Binding ElementName=throttle, Path=Value}" HorizontalAlignment="Center" FontSize="36"/>
                 </StackPanel>
                     
                
@@ -32,7 +32,7 @@
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top" Height="100" Margin="0,0,0,50">
                 <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Rudder---" Margin="0,0,80,0"/>
-                <TextBlock HorizontalAlignment="Center" FontSize="36" Text="value"/>
+                <TextBlock x:Name="rudderValue" FontSize="36" Text="value"/>
 
             </StackPanel>
 
@@ -42,21 +42,21 @@
                         <RotateTransform Angle="90"/>
                     </TextBlock.LayoutTransform>
                 </TextBlock>
-                <TextBlock FontSize="36" Text="value" />
+                <TextBlock x:Name="Value" HorizontalAlignment="center" Text="value" FontSize="36" />
             </StackPanel>
 
             <Viewbox DockPanel.Dock="Bottom" Height="140" Margin="0,20,0,0">
                 <StackPanel >
                     <StackPanel Orientation="Horizontal">
 
-                        <Slider x:Name="throttle"   Margin="10"
-                     Width="300" Height="20" Maximum="100" Minimum="0"  >
+                        <Slider Margin="0,20,0,0" x:Name="aileron"   
+                     Width="300" Height="20" Maximum="1" Minimum="-1" ValueChanged="Aileron_ValueChanged"  >
 
 
                         </Slider>
 
 
-                        <TextBlock HorizontalAlignment="Center" FontSize="19" Text="value"/>
+                        <TextBlock Margin="20,0,0,0" x:Name="aileronValue" FontSize="36" Text="{Binding ElementName=aileron,Path=Value}"/>
                         
 
                     </StackPanel>

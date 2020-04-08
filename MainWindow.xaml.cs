@@ -2,6 +2,7 @@
 using flightGear.viewModels;
 using System.Windows;
 using System.Windows.Media;
+using System;
 
 namespace flightGear
 {
@@ -26,7 +27,9 @@ namespace flightGear
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.connect();
+            string ip = ipTextBox.Text;
+            int port = Int32.Parse(portTextBox.Text);
+            vm.connect(ip, port);
             connectionStatus.Content = "Connected";
             connectionStatus.Foreground = Brushes.Green;
             elipseConnectionStatus.Fill = Brushes.Green;

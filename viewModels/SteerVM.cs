@@ -1,13 +1,14 @@
 ﻿using flightGear.models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace flightGear.viewModels
 {
-    class SteerVM
+    class SteerVM : INotifyPropertyChanged
     {
 
         IFlightGearModel model;
@@ -15,13 +16,16 @@ namespace flightGear.viewModels
         private double elevator;
         private double throttle;
         private double aileron;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public SteerVM(IFlightGearModel model)
         {
             this.model = model;
         }
 
 
-        public double Rudder
+        public double VM_Rudder
         {
             get { return rudder; }
             set
@@ -31,12 +35,20 @@ namespace flightGear.viewModels
                     this.rudder = Math.Round(value, 2);
                     Console.WriteLine("rudder = " + value);
                     model.set_steer("rudder", value);
+                    NotifyPropertyChanged("VM_" + "Rudder");
 
                 }
 
             }
         }
-        public double Elevator
+
+        private void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        public double VM_Elevator
         {
             get { return elevator; }
             set
@@ -46,12 +58,13 @@ namespace flightGear.viewModels
                     this.elevator = Math.Round(value, 2);
                     Console.WriteLine("elevator = " + value);
                     model.set_steer("elevator", value);
+                    NotifyPropertyChanged("VM_" + "Elevator");
 
                 }
 
             }
         }
-        public double Aileron
+        public double VM_Aileron
         {
             get { return aileron; }
             set
@@ -66,7 +79,7 @@ namespace flightGear.viewModels
 
             }
         }
-        public double Throttle
+        public double VM_Throttle
         {
             get { return throttle; }
             set

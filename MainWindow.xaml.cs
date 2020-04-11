@@ -3,6 +3,7 @@ using flightGear.viewModels;
 using System.Windows;
 using System.Windows.Media;
 using System;
+using flightGear.views;
 
 namespace flightGear
 {
@@ -12,13 +13,19 @@ namespace flightGear
     public partial class MainWindow : Window
     {
         FlightGearViewModel vm;
+        private IFlightGearModel model;
         private bool connected;
         public MainWindow()
         {
 
             InitializeComponent();
-            vm = new FlightGearViewModel(new MyDashboardModel(new MyTelnetClient()));
+            this.model = new MyDashboardModel(new MyTelnetClient());
+            vm = new FlightGearViewModel(this.model);
+            SteerVM steerVM = new SteerVM(this.model);
+            MapVM mapVM = new MapVM(this.model);
 
+            //mapUC.DataContext = mapVM;
+            steerUC.DataContext = steerVM;
             DataContext = vm;
             
             
@@ -34,6 +41,8 @@ namespace flightGear
             connectionStatus.Foreground = Brushes.Green;
             elipseConnectionStatus.Fill = Brushes.Green;
             connected = true;
+
+            //views.steer.DataContext = new SteerVM(this.model);
         }
 
         private void disconnectButton_Click(object sender, RoutedEventArgs e)
@@ -45,9 +54,5 @@ namespace flightGear
             connected = false;
         }
 
-        private void blinkElipse()
-        {
-
-        }
     }
 }

@@ -65,11 +65,11 @@ namespace flightGear.models
 
             //---convert the data received into a string---
             string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            Console.WriteLine("Received : " + dataReceived);
+            //Console.WriteLine("Received : " + dataReceived);
 
             //---write back the text to the client---
             
-            Console.WriteLine("Received: {0}", dataReceived);
+            //Console.WriteLine("Received: {0}", dataReceived);
             return dataReceived;
         }
 
@@ -88,7 +88,7 @@ namespace flightGear.models
             // Send the message to the connected TcpServer. 
             stream.Write(data, 0, data.Length);
             
-            Console.WriteLine("Sent: {0}", command);
+            //Console.WriteLine("Sent: {0}", command);
         }
 
 

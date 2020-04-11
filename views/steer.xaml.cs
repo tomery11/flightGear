@@ -21,12 +21,24 @@ namespace flightGear.views
     /// </summary>
     public partial class steer : UserControl
     {
+        private double rudder;
+        private double elevator;
+        public double Rudder { get { return rudder; } set { rudder = value; steerVM.VM_Rudder = value; } }
+        public double Elevator { get { return elevator; } set { elevator = value; steerVM.VM_Elevator = value; } }
 
-        private SteerVM vm;
+        private SteerVM steerVM;
+        
         public steer()
         {
             InitializeComponent();
-            
+
+            this.Loaded += (s, e) =>
+            {
+                steerVM = (SteerVM)DataContext;
+
+
+            };
+
         }
 
         private void Throttle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

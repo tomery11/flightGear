@@ -18,62 +18,85 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-            <Viewbox Grid.Row="1" Grid.Column="0">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" FontSize="36" Text="Throttle" FontWeight="bold">
-                            <TextBlock.LayoutTransform>
-                                <RotateTransform Angle="90"/>
-                            </TextBlock.LayoutTransform>
-                        </TextBlock>
-                        <Slider x:Name="throttle"  Orientation="Vertical" Margin="10"
-                     Width="20" Height="300" Maximum="1" Minimum="0" ValueChanged="Throttle_ValueChanged" >
 
-                        </Slider>
-
-                    </StackPanel>
-                    <TextBlock x:Name="throttleValue" Text="{Binding ElementName=throttle, Path=Value}" HorizontalAlignment="Center" FontSize="36"/>
-                </StackPanel>
-                    
-               
-                
-            </Viewbox>
-
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"  >
-                <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Rudder---" Margin="0,0,80,0"/>
-                <TextBlock x:Name="rudderValue" FontSize="36" Text="value"/>
-
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Margin="0,100,50,0">
-                <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Elevator---" Margin="0,0,0,100">
-                    <TextBlock.LayoutTransform>
-                        <RotateTransform Angle="90"/>
-                    </TextBlock.LayoutTransform>
-                </TextBlock>
-                <TextBlock x:Name="Value" HorizontalAlignment="center" Text="value" FontSize="36" />
-            </StackPanel>
-
-            <Viewbox Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" >
-                <StackPanel >
-                    <StackPanel Orientation="Horizontal">
-
-                    <Slider  x:Name="aileron"   
-                     Width="300" Height="20" Maximum="1" Minimum="-1" ValueChanged="Aileron_ValueChanged"  >
-
+        <Viewbox Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" FontSize="36" Text="Throttle" FontWeight="bold">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="90"/>
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                    <Slider x:Name="throttle"  Orientation="Vertical" Margin="10"
+                            Width="20" Height="300" Maximum="1" Minimum="0" ValueChanged="Throttle_ValueChanged"
+                            Value="{Binding VM_Throttle, Mode=OneWayToSource}" RenderTransformOrigin="0.5,0.5" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
 
                     </Slider>
 
                 </StackPanel>
-                    <TextBlock HorizontalAlignment="Center" FontSize="36" Text="Aileron" FontWeight="bold" VerticalAlignment="Bottom" />
+                <TextBlock x:Name="throttleValue" Text="{Binding ElementName=throttle, Path=Value}" HorizontalAlignment="Center" FontSize="36"/>
+            </StackPanel>
+
+
+
+        </Viewbox>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Margin="0,0,0,0" VerticalAlignment="Top"  >
+            <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Rudder---" />
+            <TextBlock x:Name="rudderValue" FontSize="36" HorizontalAlignment="Center" 
+                       Text="{Binding Path=VM_Rudder, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Margin="0,100,50,0">
+            <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Elevator---" Margin="0,0,0,100">
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="90"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
+            <TextBlock x:Name="Value" HorizontalAlignment="center" Text="{Binding Path=VM_Elevator,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" FontSize="36" >
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="90"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
+        </StackPanel>
+
+        <Viewbox Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" >
+            <StackPanel >
+                <StackPanel Orientation="Horizontal">
+
+                    <Slider  x:Name="aileron"   
+                        Width="300" Height="20" Maximum="1" Minimum="-1" ValueChanged="Aileron_ValueChanged"
+                        Value="{Binding VM_Aileron, UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}" RenderTransformOrigin="0.5,0.5">
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+
+                </StackPanel>
+                <TextBlock HorizontalAlignment="Center" FontSize="36" Text="Aileron" FontWeight="bold" VerticalAlignment="Bottom" />
                 <TextBlock Margin="40,0,0,0" x:Name="aileronValue" FontSize="36" Text="{Binding ElementName=aileron,Path=Value}" HorizontalAlignment="Center"/>
             </StackPanel>
-                
-                
-            </Viewbox>
-           
-            <views:Joystick Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50"/>
-        
+
+
+        </Viewbox>
+
+        <views:Joystick Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80"
+                        NormalizedX="{Binding Rudder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        NormalizedY="{Binding Elevator, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
     </Grid>
 </UserControl>

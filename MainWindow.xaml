@@ -40,7 +40,7 @@
         
         <Border Margin="20" Grid.Row="1"  Grid.Column="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
             
-            <views:map  />
+            <views:map x:Name="mapUC" />
         </Border>
 
 
@@ -48,7 +48,7 @@
 
         <Border Grid.Row="1" Grid.Column="1" Margin="15"  BorderThickness="2" BorderBrush="Black" CornerRadius="3">
             <Viewbox>
-                <views:dashboard/>
+                <views:dashboard x:Name="dashboardUC"/>
 
             </Viewbox>
         </Border>
@@ -56,7 +56,7 @@
 
         <Border Grid.Row="2" Grid.Column="1" Margin="20" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
             <Viewbox >
-                <views:steer />
+                <views:steer x:Name="steerUC" />
 
             </Viewbox>
         </Border>

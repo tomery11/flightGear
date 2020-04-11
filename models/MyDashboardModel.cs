@@ -13,6 +13,7 @@ namespace flightGear.models
     {
 
         ITelnetClient telnetClient;
+        private static Mutex mutex = new Mutex();
         volatile Boolean stop;
         private double heading;
         private double verticalSpeed;
@@ -94,7 +95,7 @@ namespace flightGear.models
             }
         }
 
-      
+
         public Location Location {
             get { return location; }
             set
@@ -122,14 +123,14 @@ namespace flightGear.models
             stop = false;
         }
 
-       
+
 
 
         public void connect(string ip, int port)
         {
             telnetClient.connect(ip, port);
             start();
-            
+
         }
 
         public void disconnect()
@@ -146,36 +147,56 @@ namespace flightGear.models
                 {
                     // this part will update the board with all the clocks
                     //heading update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/heading-indicator/indicated-heading-deg\n");
-                    Heading = Math.Round(Double.Parse(telnetClient.read()),2);
-                    
-               
+                    mutex.ReleaseMutex();
+                    Heading = Math.Round(Double.Parse(telnetClient.read()), 2);
+
+
                     //VerticalSpeed update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/gps/indicated-vertical-speed\n");
+                    mutex.ReleaseMutex();
                     VerticalSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //GroundSpeed update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/gps/indicated-ground-speed-kt\n");
+                    mutex.ReleaseMutex();
                     GroundSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //AirSpeed update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/airspeed-indicator/indicated-speed-kt\n");
+                    mutex.ReleaseMutex();
                     AirSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //GpsAltitude update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/gps/indicated-altitude-ft\n");
+                    mutex.ReleaseMutex();
                     GpsAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //Roll update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/attitude-indicator/internal-roll-deg\n");
+                    mutex.ReleaseMutex();
                     Roll = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //Pitch update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/attitude-indicator/internal-pitch-deg\n");
+                    mutex.ReleaseMutex();
                     Pitch = Math.Round(Double.Parse(telnetClient.read()), 2);
                     //AltimeterAltitude update
+                    mutex.WaitOne();
                     telnetClient.write("get /instrumentation/altimeter/indicated-altitude-ft\n");
+                    mutex.ReleaseMutex();
                     AltimeterAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
                     // get longtitude
+                    mutex.WaitOne();
                     telnetClient.write("get /position/longitude-deg\n");
+                    mutex.ReleaseMutex();
                     double longtitude = double.Parse(this.telnetClient.read());
-                    // get altitude
+                    // get latitude
+                    mutex.WaitOne();
                     telnetClient.write("get /position/latitude-deg\n");
+                    mutex.ReleaseMutex();
                     double latitude = double.Parse(this.telnetClient.read());
                     Location = new Location(latitude, longtitude);
 
@@ -184,10 +205,24 @@ namespace flightGear.models
             }).Start();
         }
 
+        public void get_location()
+        {
+            // get longtitude
+            mutex.WaitOne();
+            telnetClient.write("get /position/longitude-deg\n");
+            mutex.ReleaseMutex();
+            double longtitude = double.Parse(this.telnetClient.read());
+            // get latitude
+            mutex.WaitOne();
+            telnetClient.write("get /position/latitude-deg\n");
+            mutex.ReleaseMutex();
+            double latitude = double.Parse(this.telnetClient.read());
+            Location = new Location(latitude, longtitude);
+        }
 
         public void set_steer(string name, double value)
         {
-            //its null but will be initialized.
+            
             string to_send = null;
             if (name.Equals("throttle"))
             {
@@ -205,7 +240,11 @@ namespace flightGear.models
             {
                 to_send = "set /controls/flight/rudder " + value + "\n";
             }
+            Console.WriteLine(to_send);
+            mutex.WaitOne();
             telnetClient.write(to_send);
+            mutex.ReleaseMutex();
+            telnetClient.read();
 
         }
 

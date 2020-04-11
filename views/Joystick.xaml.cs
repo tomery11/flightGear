@@ -22,6 +22,32 @@ namespace flightGear.views
     {
         private bool mousePressed;
         Point knobCenter;
+
+        public double NormalizedX
+        {
+            get { return (double)GetValue(NormalizedXProperty); }
+            set { SetValue(NormalizedXProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty NormalizedXProperty =
+            DependencyProperty.Register("NormalizedX", typeof(double), typeof(Joystick));
+
+
+
+        public double NormalizedY
+        {
+            get { return (double)GetValue(NormalizedYProperty); }
+            set { SetValue(NormalizedYProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty NormalizedYProperty =
+            DependencyProperty.Register("NormalizedY", typeof(double), typeof(Joystick));
+
+
+
+
         public Joystick()
         {
             InitializeComponent();
@@ -44,7 +70,7 @@ namespace flightGear.views
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            double slope, absX, absY, normalizedX, normalizedY;
+            double slope, absX, absY;
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 //calculating linear equation to find points at radius distance from base if mouse go out.
@@ -117,8 +143,8 @@ namespace flightGear.views
                     knobPosition.Y = y;
                 }
             }
-            normalizedX = knobPosition.X / 170;
-            normalizedY = knobPosition.Y / 170;
+            NormalizedX = knobPosition.X / 170;
+            NormalizedY = knobPosition.Y / 170;
         }
 
         /*

@@ -20,8 +20,7 @@ namespace flightGear.views
     /// </summary>
     public partial class Joystick : UserControl
     {
-        private bool mousePressed;
-        Point knobCenter;
+
 
         public double NormalizedX
         {
@@ -55,7 +54,7 @@ namespace flightGear.views
 
         private void centerKnob_Completed(object sender, EventArgs e) { }
         private Point firstPoint = new Point();
-        //double x1, y1, x2, y2;
+
 
 
         private void Knob_MouseDown(object sender, MouseButtonEventArgs e)
@@ -70,7 +69,7 @@ namespace flightGear.views
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            double slope, absX, absY;
+            double gradient, absX, absY;
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 //calculating linear equation to find points at radius distance from base if mouse go out.
@@ -93,9 +92,9 @@ namespace flightGear.views
                     else
                     {
                         //linear equation to calculate point at radious on same line.
-                        slope = y / x;
-                        absX = Math.Sqrt(Math.Pow(Base.Width / 2, 2) / (Math.Pow(slope, 2) + 1));
-                        absY = absX * slope;
+                        gradient = y / x;
+                        absX = Math.Sqrt(Math.Pow(Base.Width / 2, 2) / (Math.Pow(gradient, 2) + 1));
+                        absY = absX * gradient;
                         if (x > 0)
                         {
                             knobPosition.X = absX;
@@ -144,7 +143,7 @@ namespace flightGear.views
                 }
             }
             NormalizedX = knobPosition.X / 170;
-            NormalizedY = knobPosition.Y / 170;
+            NormalizedY = (knobPosition.Y / 170) * -1;
         }
 
         /*
@@ -160,7 +159,7 @@ namespace flightGear.views
             knobPosition.Y = 0;
             UIElement element = (UIElement)Knob;
             element.ReleaseMouseCapture();
-            //mousePressed = false;
+            
         }
 
         private void Knob_MouseLeave(object sender, MouseEventArgs e)

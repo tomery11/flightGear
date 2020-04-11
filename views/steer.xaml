@@ -56,17 +56,18 @@
 
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Margin="0,100,50,0">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Margin="0,100,50,0">
+            <TextBlock x:Name="Value" HorizontalAlignment="center" VerticalAlignment="Center" Text="{Binding Path=VM_Elevator,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" FontSize="36" >
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="90"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
             <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Elevator---" Margin="0,0,0,100">
                 <TextBlock.LayoutTransform>
                     <RotateTransform Angle="90"/>
                 </TextBlock.LayoutTransform>
             </TextBlock>
-            <TextBlock x:Name="Value" HorizontalAlignment="center" Text="{Binding Path=VM_Elevator,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" FontSize="36" >
-                <TextBlock.LayoutTransform>
-                    <RotateTransform Angle="90"/>
-                </TextBlock.LayoutTransform>
-            </TextBlock>
+            
         </StackPanel>
 
         <Viewbox Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" >

@@ -61,8 +61,8 @@
             </Viewbox>
         </Border>
 
-        <Border Margin="20,0,20,5" Grid.Row="3" Grid.Column="0" BorderThickness="2" BorderBrush="White" CornerRadius="2">
-            <Label Content="Error" HorizontalAlignment="Center" FontSize="10"/>
+        <Border x:Name="errorArea" Margin="20,0,20,5" Grid.Row="3" Grid.Column="0" BorderThickness="2" BorderBrush="White" CornerRadius="2">
+            <Label x:Name="errorWindow" Content="" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
         </Border>
         
        

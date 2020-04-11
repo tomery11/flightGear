@@ -19,14 +19,7 @@ namespace flightGear
         {
 
             InitializeComponent();
-            this.model = new MyDashboardModel(new MyTelnetClient());
-            vm = new FlightGearViewModel(this.model);
-            SteerVM steerVM = new SteerVM(this.model);
-            MapVM mapVM = new MapVM(this.model);
-
-            //mapUC.DataContext = mapVM;
-            steerUC.DataContext = steerVM;
-            DataContext = vm;
+            
             
             
             
@@ -36,13 +29,32 @@ namespace flightGear
         {
             string ip = ipTextBox.Text;
             int port = Int32.Parse(portTextBox.Text);
-            vm.connect(ip, port);
-            connectionStatus.Content = "Connected";
-            connectionStatus.Foreground = Brushes.Green;
-            elipseConnectionStatus.Fill = Brushes.Green;
-            connected = true;
+            if (ip != "localhost" || port != 5402)
+            {
+                errorWindow.Content = "Invalid Port or IP ! please re-insert correct credentials";
+                errorArea.Background = Brushes.Red;
+            }
+            else
+            {
+                this.model = new MyDashboardModel(new MyTelnetClient());
+                vm = new FlightGearViewModel(this.model);
+                SteerVM steerVM = new SteerVM(this.model);
+                MapVM mapVM = new MapVM(this.model);
 
-            //views.steer.DataContext = new SteerVM(this.model);
+                //mapUC.DataContext = mapVM;
+                steerUC.DataContext = steerVM;
+                DataContext = vm;
+                vm.connect(ip, port);
+                connectionStatus.Content = "Connected";
+                connectionStatus.Foreground = Brushes.Green;
+                elipseConnectionStatus.Fill = Brushes.Green;
+                errorWindow.Content = "";
+                errorArea.Background = Brushes.Transparent;
+                connected = true;
+            }
+            
+
+            
         }
 
         private void disconnectButton_Click(object sender, RoutedEventArgs e)

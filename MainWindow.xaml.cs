@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System;
 using flightGear.views;
+using System.Configuration;
 
 namespace flightGear
 {
@@ -19,17 +20,18 @@ namespace flightGear
         {
 
             InitializeComponent();
-            
-            
-            
-            
+            ipTextBox.Text = ConfigurationManager.AppSettings["ip"];
+            portTextBox.Text = ConfigurationManager.AppSettings["port"];
+
+
+
         }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
             string ip = ipTextBox.Text;
             int port = Int32.Parse(portTextBox.Text);
-            if (ip != "localhost" || port != 5402)
+            if ((ip != "localhost" && ip != "127.0.0.1") || port != 5402)
             {
                 errorWindow.Content = "Invalid Port or IP ! please re-insert correct credentials";
                 errorArea.Background = Brushes.Red;

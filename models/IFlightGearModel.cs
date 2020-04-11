@@ -28,6 +28,8 @@ namespace flightGear.models
         double Pitch { set; get; }
         double AltimeterAltitude { set; get; }
 
+        void set_steer(string v, double value);
+
         double Rudder { set; get; }
         double Elevator { set; get; }
         double Aileron { set; get; }

@@ -94,37 +94,7 @@ namespace flightGear.models
             }
         }
 
-        
-        public double Rudder {
-            get { return rudder; } 
-            set { rudder = value;
-                NotifyPropertyChanged("Rudder");
-            } 
-        }
-        public double Elevator {
-            get { return elevator; }
-            set
-            {
-                elevator = value;
-                NotifyPropertyChanged("elevator");
-            }
-        }
-        public double Aileron {
-            get { return aileron; }
-            set
-            {
-                aileron = value;
-                NotifyPropertyChanged("Aileron");
-            }
-        }
-        public double Throttle {
-            get { return throttle; }
-            set
-            {
-                throttle = value;
-                NotifyPropertyChanged("Throttle");
-            }
-        }
+      
         public Location Location {
             get { return location; }
             set
@@ -133,6 +103,11 @@ namespace flightGear.models
                 NotifyPropertyChanged("Location");
             }
         }
+
+        public double Rudder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double Elevator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double Aileron { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double Throttle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -208,5 +183,33 @@ namespace flightGear.models
                 }
             }).Start();
         }
+
+
+        public void set_steer(string name, double value)
+        {
+            //its null but will be initialized.
+            string to_send = null;
+            if (name.Equals("throttle"))
+            {
+                to_send = "set /controls/engines/current-engine/throttle " + value + "\n";
+            }
+            else if (name.Equals("aileron"))
+            {
+                to_send = "set /controls/flight/aileron " + value + "\n";
+            }
+            else if (name.Equals("elevator"))
+            {
+                to_send = "set /controls/flight/elevator " + value + "\n";
+            }
+            else if (name.Equals("rudder"))
+            {
+                to_send = "set /controls/flight/rudder " + value + "\n";
+            }
+            telnetClient.write(to_send);
+
+        }
+
+
+
     }
 }

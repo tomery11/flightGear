@@ -1,4 +1,5 @@
-﻿using System;
+﻿using flightGear.viewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace flightGear.views
     /// </summary>
     public partial class steer : UserControl
     {
+
+        private SteerVM vm;
         public steer()
         {
             InitializeComponent();
+            
         }
 
         private void Throttle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

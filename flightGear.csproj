@@ -66,6 +66,7 @@
     <Compile Include="models\MyDashboardModel.cs" />
     <Compile Include="models\MyTelnetClient.cs" />
     <Compile Include="viewModels\FlightGearViewModel.cs" />
+    <Compile Include="viewModels\SteerVM.cs" />
     <Compile Include="views\dashboard.xaml.cs">
       <DependentUpon>dashboard.xaml</DependentUpon>
     </Compile>

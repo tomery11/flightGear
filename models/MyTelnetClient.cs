@@ -33,6 +33,7 @@ namespace flightGear.models
                 tcpclnt.Connect(SERVER_IP, PORT_NO);
 
                 Console.WriteLine("Connected");
+                tcpclnt.ReceiveTimeout = 10000;
                 this.stream = tcpclnt.GetStream();
 
             }
@@ -58,6 +59,7 @@ namespace flightGear.models
 
         public string read()
         {
+
             byte[] buffer = new byte[tcpclnt.ReceiveBufferSize];
             
             //---read incoming stream---

@@ -22,6 +22,9 @@ namespace flightGear.viewModels
         public SteerVM(IFlightGearModel model)
         {
             this.model = model;
+
+            this.model.PropertyChanged +=
+             delegate (Object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("VM_" + e.PropertyName); };
         }
 
 

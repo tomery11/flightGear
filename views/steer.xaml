@@ -96,8 +96,8 @@
         </Viewbox>
 
         <views:Joystick Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80"
-                        NormalizedX="{Binding Rudder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                        NormalizedY="{Binding Elevator, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        NormalizedX="{Binding VM_Rudder,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        NormalizedY="{Binding VM_Elevator,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
     </Grid>
 </UserControl>

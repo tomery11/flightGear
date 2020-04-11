@@ -23,8 +23,8 @@ namespace flightGear.views
     {
         private double rudder;
         private double elevator;
-        public double Rudder { get { return rudder; } set { rudder = value; steerVM.VM_Rudder = value; } }
-        public double Elevator { get { return elevator; } set { elevator = value; steerVM.VM_Elevator = value; } }
+        public double Rudder { get { return rudder; } set { rudder = value;  } }
+        public double Elevator { get { return elevator; } set { elevator = value; } }
 
         private SteerVM steerVM;
         

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450">
     <Grid >
-
+        <!--row and col def-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        <!--adding Throttle section including slider and value-->
         <Viewbox Grid.Row="1" Grid.Column="0">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -48,14 +48,14 @@
 
 
         </Viewbox>
-
+        <!--adding elevator section includingvalue-->
         <StackPanel HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Margin="0,0,0,0" VerticalAlignment="Top"  >
             <TextBlock HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Text="---Rudder---" />
             <TextBlock x:Name="rudderValue" FontSize="36" HorizontalAlignment="Center" 
                        Text="{Binding Path=VM_Rudder, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
         </StackPanel>
-
+        <!--adding elevator section includin slider and value-->
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Margin="0,100,50,0">
             <TextBlock x:Name="Value" HorizontalAlignment="center" VerticalAlignment="Center" Text="{Binding Path=VM_Elevator,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" FontSize="36" >
                 <TextBlock.LayoutTransform>
@@ -69,7 +69,7 @@
             </TextBlock>
             
         </StackPanel>
-
+        <!--adding Aileron section including slider and value-->
         <Viewbox Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" >
             <StackPanel >
                 <StackPanel Orientation="Horizontal">
@@ -94,7 +94,7 @@
 
 
         </Viewbox>
-
+        <!--adding joystick to userControl-->
         <views:Joystick Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80"
                         NormalizedX="{Binding VM_Rudder,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         NormalizedY="{Binding VM_Elevator,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>

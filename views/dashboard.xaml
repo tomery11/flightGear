@@ -7,51 +7,52 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <!--row and col def-->
         <Grid.RowDefinitions>
             
             
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
 
             
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
 
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
 
 
 
         </Grid.ColumnDefinitions>
 
         <!--properties of dashboard-->
-        <Label Grid.Row ="0" Grid.Column="0" Content="_Heading:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row ="1" Grid.Column="0" Content="_Vertical Speed:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row ="2" Grid.Column="0" Content="_GPS Ground Speed:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row ="3" Grid.Column="0" Content="_Airspeed:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row ="4" Grid.Column="0" Content="_GPS Altitude:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row ="5" Grid.Column="0" Content="_Roll:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row ="6" Grid.Column="0" Content="_Pitch:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row ="7" Grid.Column="0" Content="_Altimeter:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="0" Grid.Column="0" Content="_Heading:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="1" Grid.Column="0" Content="_Vertical Speed:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="2" Grid.Column="0" Content="_GPS Ground Speed:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="3" Grid.Column="0" Content="_Airspeed:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="4" Grid.Column="0" Content="_GPS Altitude:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="5" Grid.Column="0" Content="_Roll:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="6" Grid.Column="0" Content="_Pitch:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row ="7" Grid.Column="0" Content="_Altimeter:" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
        
         
         <!--labels for data recieved from server-->
-        <Label Name="heading" Grid.Row ="0" Grid.Column="1" Content = "{Binding Path=VM_Heading}"  FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="vspeed" Grid.Row ="1" Grid.Column="1" Content="{Binding Path=VM_VerticalSpeed}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row ="2" Grid.Column="1" Content="{Binding Path=VM_GroundSpeed}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="airspeed" Grid.Row ="3" Grid.Column="1" Content="{Binding Path=VM_AirSpeed}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="gpsalt" Grid.Row ="4" Grid.Column="1" Content="{Binding Path=VM_GpsAltitude}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="roll" Grid.Row ="5" Grid.Column="1" Content="{Binding Path=VM_Roll}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="pitch" Grid.Row ="6" Grid.Column="1" Content="{Binding Path=VM_Pitch}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="altimeter" Grid.Row ="7" Grid.Column="1" Content="{Binding Path=VM_AltimeterAltitude}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="heading" Grid.Row ="0" Grid.Column="1" Content = "{Binding Path=VM_Heading}"  FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="vspeed" Grid.Row ="1" Grid.Column="1" Content="{Binding Path=VM_VerticalSpeed}" FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row ="2" Grid.Column="1" Content="{Binding Path=VM_GroundSpeed}" FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="airspeed" Grid.Row ="3" Grid.Column="1" Content="{Binding Path=VM_AirSpeed}" FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="gpsalt" Grid.Row ="4" Grid.Column="1" Content="{Binding Path=VM_GpsAltitude}" FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="roll" Grid.Row ="5" Grid.Column="1" Content="{Binding Path=VM_Roll}" FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="pitch" Grid.Row ="6" Grid.Column="1" Content="{Binding Path=VM_Pitch}" FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="altimeter" Grid.Row ="7" Grid.Column="1" Content="{Binding Path=VM_AltimeterAltitude}" FontSize="40" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
     </Grid>
 </UserControl>

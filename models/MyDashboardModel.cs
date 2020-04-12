@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.Maps.MapControl.WPF;
+using System.IO;
 
 namespace flightGear.models
 {
@@ -25,6 +26,8 @@ namespace flightGear.models
         private double altimeterAltitude;
 
         private Location location;
+
+        private string errorString;
 
         public double Heading
         {
@@ -101,6 +104,15 @@ namespace flightGear.models
                 NotifyPropertyChanged("Location");
             }
         }
+        public string ErrorString
+        {
+            get { return errorString; }
+            set
+            {
+                errorString = value;
+                NotifyPropertyChanged("ErrorString");
+            }
+        }
 
         public double Rudder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double Elevator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -145,73 +157,89 @@ namespace flightGear.models
             {
                 while (!stop)
                 {
-                    // this part will update the board with all the clocks
-                    //heading update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/heading-indicator/indicated-heading-deg\n");
-                    Heading = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
+                    try
+                    {
+                        // this part will update the board with all the clocks
+                        //heading update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/heading-indicator/indicated-heading-deg\n");
+                        Heading = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
 
 
-                    //VerticalSpeed update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/gps/indicated-vertical-speed\n");
-                    VerticalSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
-                    //GroundSpeed update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/gps/indicated-ground-speed-kt\n");
-                    GroundSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
-                    //AirSpeed update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/airspeed-indicator/indicated-speed-kt\n");
-                    AirSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
-                    //GpsAltitude update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/gps/indicated-altitude-ft\n");
-                    GpsAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
-                    //Roll update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/attitude-indicator/internal-roll-deg\n");
-                    Roll = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
-                    //Pitch update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/attitude-indicator/internal-pitch-deg\n");
-                    Pitch = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
-                    //AltimeterAltitude update
-                    mutex.WaitOne();
-                    telnetClient.write("get /instrumentation/altimeter/indicated-altitude-ft\n");
-                    AltimeterAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
-                    mutex.ReleaseMutex();
-                    
-                    // get longtitude
-                    mutex.WaitOne();
-                    telnetClient.write("get /position/longitude-deg\n");
-                    double longtitude = double.Parse(this.telnetClient.read());
-                    mutex.ReleaseMutex();
-                    
-                    // get latitude
-                    mutex.WaitOne();
-                    telnetClient.write("get /position/latitude-deg\n");
-                    string ans = this.telnetClient.read();
-                    double latitude = double.Parse(ans);
-                    Location = new Location(latitude, longtitude);
-                    mutex.ReleaseMutex();
-                    
 
-                    Thread.Sleep(250);
+                        //VerticalSpeed update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/gps/indicated-vertical-speed\n");
+                        VerticalSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
+
+                        //GroundSpeed update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/gps/indicated-ground-speed-kt\n");
+                        GroundSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
+
+                        //AirSpeed update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/airspeed-indicator/indicated-speed-kt\n");
+                        AirSpeed = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
+
+                        //GpsAltitude update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/gps/indicated-altitude-ft\n");
+                        GpsAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
+
+                        //Roll update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/attitude-indicator/internal-roll-deg\n");
+                        Roll = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
+
+                        //Pitch update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/attitude-indicator/internal-pitch-deg\n");
+                        Pitch = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
+
+                        //AltimeterAltitude update
+                        mutex.WaitOne();
+                        telnetClient.write("get /instrumentation/altimeter/indicated-altitude-ft\n");
+                        AltimeterAltitude = Math.Round(Double.Parse(telnetClient.read()), 2);
+                        mutex.ReleaseMutex();
+
+                        // get longtitude
+                        mutex.WaitOne();
+                        telnetClient.write("get /position/longitude-deg\n");
+                        double longtitude = double.Parse(this.telnetClient.read());
+                        mutex.ReleaseMutex();
+
+                        // get latitude
+                        mutex.WaitOne();
+                        telnetClient.write("get /position/latitude-deg\n");
+                        string ans = this.telnetClient.read();
+                        double latitude = double.Parse(ans);
+                        Location = new Location(latitude, longtitude);
+                        mutex.ReleaseMutex();
+
+
+                        Thread.Sleep(250);
+                    }
+                    catch(IOException e)
+                    {
+                        ErrorString = "Exception: you are already connected to the server";
+                        //throw new IOException();
+                        
+                    }
+                    catch(TimeoutException e)
+                    {
+
+                        ErrorString = "Exception: timeout";
+                        //throw new TimeoutException();
+                    }
+
                 }
             }).Start();
         }

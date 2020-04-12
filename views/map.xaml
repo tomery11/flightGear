@@ -22,6 +22,7 @@
         </ControlTemplate>
     </UserControl.Resources>
     <Grid>
+        <!--adding icon for pushpin-->
         <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" Grid.Row="1" ZoomLevel="6" Center="32.005500,34.885400">
             <Canvas
              m:MapLayer.Position="{Binding Path=VM_Location}"

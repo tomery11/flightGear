@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="Flight Gear" Height="450" Width="800">
     <Grid Background="DimGray">
+        <!--row and col def-->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -21,7 +22,7 @@
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
-
+        <!--connection to server part-->
         <Border BorderBrush="Black" BorderThickness="2" Margin="5,10,5,0" CornerRadius="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <StackPanel  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="White">
 
@@ -37,7 +38,7 @@
 
             </StackPanel>
         </Border>
-        
+        <!--map userControl-->
         <Border Margin="20" Grid.Row="1"  Grid.Column="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
             
             <views:map x:Name="mapUC" />
@@ -45,7 +46,7 @@
 
 
 
-
+        <!--dashboard userControl-->
         <Border Grid.Row="1" Grid.Column="1" Margin="15"  BorderThickness="2" BorderBrush="Black" CornerRadius="3">
             <Viewbox>
                 <views:dashboard x:Name="dashboardUC"/>
@@ -53,14 +54,14 @@
             </Viewbox>
         </Border>
 
-
+        <!--steer userControl-->
         <Border Grid.Row="2" Grid.Column="1" Margin="20" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
             <Viewbox >
                 <views:steer x:Name="steerUC" />
 
             </Viewbox>
         </Border>
-
+        <!--error window-->
         <Border x:Name="errorArea" Margin="20,0,20,5" Grid.Row="3" Grid.Column="0" BorderThickness="2" BorderBrush="White" CornerRadius="2">
             <Label x:Name="errorWindow" Content="" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
         </Border>

@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System;
 using flightGear.views;
 using System.Configuration;
+using System.Net.Sockets;
 
 namespace flightGear
 {
@@ -46,13 +47,31 @@ namespace flightGear
                 //mapUC.DataContext = mapVM;
                 steerUC.DataContext = steerVM;
                 DataContext = vm;
-                vm.connect(ip, port);
-                connectionStatus.Content = "Connected";
-                connectionStatus.Foreground = Brushes.Green;
-                elipseConnectionStatus.Fill = Brushes.Green;
-                errorWindow.Content = "";
-                errorArea.Background = Brushes.Transparent;
-                connected = true;
+                try
+                {
+                    vm.connect(ip, port);
+                    connectionStatus.Content = "Connected";
+                    connectionStatus.Foreground = Brushes.Green;
+                    elipseConnectionStatus.Fill = Brushes.Green;
+                    errorWindow.Content = "";
+                    errorArea.Background = Brushes.Transparent;
+                    connected = true;
+                }
+                catch (ArgumentNullException er)
+                {
+                    Console.WriteLine("ArgumentNullException: {0}", er);
+                    
+                    errorWindow.Content = "Exception: " + er;
+                    errorArea.Background = Brushes.Red;
+                }
+                catch (SocketException er)
+                {
+                    Console.WriteLine("SocketException: {0}", er);
+                    
+                    errorWindow.Content = "Exception: no server is running";
+                    errorArea.Background = Brushes.Red;
+                }
+
             }
             
 
@@ -61,11 +80,22 @@ namespace flightGear
 
         private void disconnectButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.disconnect();
-            connectionStatus.Content = "Disconnected";
-            connectionStatus.Foreground = Brushes.Red;
-            elipseConnectionStatus.Fill = Brushes.Red;
-            connected = false;
+            try
+            {
+                vm.disconnect();
+                connectionStatus.Content = "Disconnected";
+                connectionStatus.Foreground = Brushes.Red;
+                elipseConnectionStatus.Fill = Brushes.Red;
+                connected = false;
+            }
+            catch (NullReferenceException er)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", er);
+
+                errorWindow.Content = "Exception: you tried to disconnect while you haven't connected server yet";
+                errorArea.Background = Brushes.Red;
+            }
+
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -12,8 +13,24 @@ namespace flightGear.models
     {
         TcpClient tcpclnt;
         NetworkStream stream;
-        const int PORT_NO = 5402;
-        const string SERVER_IP = "localhost";
+
+        private string errorString;
+
+
+        public string ErrorString
+        {
+            get { return errorString; }
+            set
+            {
+                errorString = value;
+                NotifyPropertyChanged("ErrorString");
+            }
+        }
+
+        private void NotifyPropertyChanged(string v)
+        {
+            throw new NotImplementedException();
+        }
 
         public MyTelnetClient()
         {
@@ -22,32 +39,34 @@ namespace flightGear.models
             
         }
 
-
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void connect(string ip, int port)
         {
-            try
-            {
+            //try
+            //{
                 Console.WriteLine("Connecting.....");
 
-                tcpclnt.Connect(SERVER_IP, PORT_NO);
+                tcpclnt.Connect(ip, port);
 
                 Console.WriteLine("Connected");
-                tcpclnt.ReceiveTimeout = 10000;
+                //tcpclnt.ReceiveTimeout = 10000;
                 this.stream = tcpclnt.GetStream();
 
-            }
+            //}
 
 
 
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine("ArgumentNullException: {0}", e);
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
+            //catch (ArgumentNullException e)
+            //{
+            //    Console.WriteLine("ArgumentNullException: {0}", e);
+            //    ErrorString = "Exception: " + e;
+            //}
+            //catch (SocketException e)
+            //{
+            //    Console.WriteLine("SocketException: {0}", e);
+            //    ErrorString = "Exception: " + e;
+            //}
 
         }
 
@@ -92,8 +111,6 @@ namespace flightGear.models
             
             //Console.WriteLine("Sent: {0}", command);
         }
-
-
 
 
     }

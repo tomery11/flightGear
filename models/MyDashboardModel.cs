@@ -23,10 +23,7 @@ namespace flightGear.models
         private double roll;
         private double pitch;
         private double altimeterAltitude;
-        private double rudder;
-        private double elevator;
-        private double aileron;
-        private double throttle;
+
         private Location location;
 
         public double Heading
@@ -123,7 +120,10 @@ namespace flightGear.models
             stop = false;
         }
 
-
+        public ITelnetClient GetTelnetClient()
+        {
+            return this.telnetClient;
+        }
 
 
         public void connect(string ip, int port)

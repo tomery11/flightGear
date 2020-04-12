@@ -103,6 +103,7 @@ namespace flightGear.viewModels
             get { return model.Location; }
         }
 
+
         public void connect(string ip, int port)
         {
 

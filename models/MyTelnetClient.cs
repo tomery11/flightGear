@@ -43,8 +43,8 @@ namespace flightGear.models
 
         public void connect(string ip, int port)
         {
-            //try
-            //{
+            try
+            {
                 Console.WriteLine("Connecting.....");
 
                 tcpclnt.Connect(ip, port);
@@ -53,8 +53,13 @@ namespace flightGear.models
                 //tcpclnt.ReceiveTimeout = 10000;
                 this.stream = tcpclnt.GetStream();
 
-            //}
+            }
+            catch (SocketException er)
+            {
+                throw er;
 
+                
+            }
 
 
             //catch (ArgumentNullException e)
@@ -80,18 +85,22 @@ namespace flightGear.models
         {
 
             byte[] buffer = new byte[tcpclnt.ReceiveBufferSize];
-            
-            //---read incoming stream---
-            int bytesRead = stream.Read(buffer, 0, tcpclnt.ReceiveBufferSize);
+            try
+            {
+                //---read incoming stream---
+                int bytesRead = stream.Read(buffer, 0, tcpclnt.ReceiveBufferSize);
 
-            //---convert the data received into a string---
-            string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            //Console.WriteLine("Received : " + dataReceived);
+                //---convert the data received into a string---
+                string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
-            //---write back the text to the client---
-            
-            //Console.WriteLine("Received: {0}", dataReceived);
-            return dataReceived;
+                return dataReceived;
+            }
+            catch(IOException e)
+            {
+                
+                throw e;
+            }
+           
         }
 
         public void write(string command)
@@ -99,17 +108,25 @@ namespace flightGear.models
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
 
 
-            //this.stream = tcpclnt.GetStream();
-
-            // Get a client stream for reading and writing.
-            //  Stream stream = client.GetStream();
 
 
+            try
+            {
+                // Send the message to the connected TcpServer. 
+                stream.Write(data, 0, data.Length);
 
-            // Send the message to the connected TcpServer. 
-            stream.Write(data, 0, data.Length);
-            
-            //Console.WriteLine("Sent: {0}", command);
+                //Console.WriteLine("Sent: {0}", command);
+            }
+            catch (IOException e)
+            {
+                throw e;
+
+            }
+            catch (NullReferenceException e)
+            {
+                throw e;
+
+            }
         }
 
 

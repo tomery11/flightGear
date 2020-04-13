@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.Maps.MapControl.WPF;
 using System.IO;
+using System.Net.Sockets;
 
 namespace flightGear.models
 {
@@ -27,7 +28,9 @@ namespace flightGear.models
 
         private Location location;
 
-        private string errorString;
+        private string errorStirng;
+        private bool connected;
+
 
         public double Heading
         {
@@ -106,18 +109,31 @@ namespace flightGear.models
         }
         public string ErrorString
         {
-            get { return errorString; }
+            get { return errorStirng; }
             set
             {
-                errorString = value;
+                errorStirng = value;
                 NotifyPropertyChanged("ErrorString");
             }
         }
+
+        public bool Connected
+        {
+            get { return connected; }
+            set
+            {
+                connected = value;
+                NotifyPropertyChanged("Connected");
+            }
+        }
+
+
 
         public double Rudder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double Elevator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double Aileron { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double Throttle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -140,22 +156,53 @@ namespace flightGear.models
 
         public void connect(string ip, int port)
         {
-            telnetClient.connect(ip, port);
-            start();
+
+
+            
+
+            try
+            {
+                telnetClient.connect(ip, port);
+                Connected = true;
+                
+
+                start();
+            }
+            
+            catch (SocketException er)
+            {
+                Console.WriteLine("SocketException: {0}", er);
+
+                ErrorString = "Exception: no server is running";
+            }
+            
 
         }
 
         public void disconnect()
         {
-            telnetClient.disconnect();
-            stop = true;
+            try
+            {
+                telnetClient.disconnect();
+                
+                Connected = false;
+                stop = true;
+            }
+            
+             catch (NullReferenceException er)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", er);
+
+                ErrorString = "Exception: you tried to disconnect while you haven't connected server yet";
+                
+            }
         }
 
         public void start()
         {
             new Thread(delegate ()
             {
-                while (!stop)
+                while (!stop && connected )
                 {
                     try
                     {
@@ -226,20 +273,16 @@ namespace flightGear.models
 
 
                         Thread.Sleep(250);
-                    }
-                    catch(IOException e)
+                    }catch(IOException e)
                     {
-                        ErrorString = "Exception: you are already connected to the server";
-                        //throw new IOException();
-                        
-                    }
-                    catch(TimeoutException e)
-                    {
+                        string error = e.ToString();
+                        if (error.Contains("time"))
+                        {
+                            ErrorString = "You are having a timeout exception";
 
-                        ErrorString = "Exception: timeout";
-                        //throw new TimeoutException();
+                        }
                     }
-
+                    
                 }
             }).Start();
         }
@@ -281,16 +324,43 @@ namespace flightGear.models
             {
                 to_send = "set /controls/flight/rudder " + value + "\n";
             }
-            Console.WriteLine(to_send);
-            mutex.WaitOne();
-            telnetClient.write(to_send);
-            telnetClient.read();
-            mutex.ReleaseMutex();
-            
+            try
+            {
+                Console.WriteLine(to_send);
+                mutex.WaitOne();
+                telnetClient.write(to_send);
+                telnetClient.read();
+                mutex.ReleaseMutex();
+            }
+            catch (IOException e)
+            {
+                string error = e.ToString();
+                if (error.Contains("time"))
+                {
+                    ErrorString = "You are having a timeout exception";
+
+                }
+                if (error.Contains("NetWork.Strem"))
+                {
+                    ErrorString = "You cannot move steer before connecting to server";
+                }
+                
+            }
+            catch(NullReferenceException e)
+            {
+                ErrorString = "Beware! you aren't connected to the server yet";
+            }
+            //catch(ObjectDisposedException e)
+            //{
+            //    ErrorString = "Exception: object";
+            //}
+
 
         }
 
-
-
+        public void setClient(ITelnetClient client)
+        {
+            telnetClient = client;
+        }
     }
 }

@@ -103,6 +103,17 @@ namespace flightGear.viewModels
             get { return model.Location; }
         }
 
+        public string VM_ErrorString
+        {
+            get { return model.ErrorString; }
+        }
+
+        public bool VM_Connected
+        {
+            get { return model.Connected; }
+        }
+
+
 
         public void connect(string ip, int port)
         {

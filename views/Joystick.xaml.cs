@@ -147,7 +147,7 @@ namespace flightGear.views
         }
 
         /*
-        * Helpin methos to calculate mouse movement length
+        * Auxilary method that calculates the mouse movement length vector.
         */
         private double distanceFromKnobCenter(double x, double y)
         {

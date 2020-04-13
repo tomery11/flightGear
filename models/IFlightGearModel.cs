@@ -35,9 +35,10 @@ namespace flightGear.models
         double Aileron { set; get; }
         double Throttle { set; get; }
         Location Location { get; set; }
-        
-        
+        string ErrorString { get; set; }
+        bool Connected { get; set; }
 
 
+        void setClient(ITelnetClient client);
     }
 }

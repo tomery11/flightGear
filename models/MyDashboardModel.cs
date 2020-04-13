@@ -103,6 +103,44 @@ namespace flightGear.models
             get { return location; }
             set
             {
+
+                if(value.Longitude > 90)
+                {
+                    value.Longitude = 90;
+                    location = value;
+                    ErrorString = "It's the end of the world";
+                    NotifyPropertyChanged("Location");
+
+                }
+                else if (value.Longitude < -90)
+                {
+                    value.Longitude = -90;
+                    location = value;
+                    ErrorString = "It's the end of the world";
+                    NotifyPropertyChanged("Location");
+                }
+                else if (value.Latitude > 180)
+                {
+                    value.Latitude = 180;
+                    location = value;
+                    ErrorString = "It's the end of the world";
+                    NotifyPropertyChanged("Location");
+                }
+                else if (value.Latitude < -180)
+                {
+                    value.Latitude = -180;
+                    location = value;
+                    ErrorString = "It's the end of the world";
+                    NotifyPropertyChanged("Location");
+                }
+                else
+                {
+
+                    location = value;
+                    NotifyPropertyChanged("Location");
+                }
+
+
                 location = value;
                 NotifyPropertyChanged("Location");
             }
@@ -157,15 +195,23 @@ namespace flightGear.models
         public void connect(string ip, int port)
         {
 
+            Heading = 0;
+            VerticalSpeed = 0;
+            GroundSpeed = 0;
+            AirSpeed = 0;
+            GpsAltitude = 0;
+            Roll = 0;
+            Pitch = 0;
+            AltimeterAltitude = 0;
+            double longtitude = 32.0055;
+            double latitude = 34.0000;
+            Location = new Location(latitude, longtitude);
 
-            
 
             try
             {
                 telnetClient.connect(ip, port);
                 Connected = true;
-                
-
                 start();
             }
             
@@ -202,10 +248,13 @@ namespace flightGear.models
         {
             new Thread(delegate ()
             {
-                while (!stop && connected )
+                while (!stop)
                 {
                     try
                     {
+
+                        
+
                         // this part will update the board with all the clocks
                         //heading update
                         mutex.WaitOne();
@@ -273,14 +322,11 @@ namespace flightGear.models
 
 
                         Thread.Sleep(250);
-                    }catch(IOException e)
+                    }catch(TimeoutException e)
                     {
-                        string error = e.ToString();
-                        if (error.Contains("time"))
-                        {
-                            ErrorString = "You are having a timeout exception";
 
-                        }
+                        ErrorString = "You are having a timeout exception";
+
                     }
                     
                 }
@@ -332,14 +378,16 @@ namespace flightGear.models
                 telnetClient.read();
                 mutex.ReleaseMutex();
             }
+            catch (TimeoutException e)
+            {
+
+                ErrorString = "You are having a timeout exception";
+
+            }
             catch (IOException e)
             {
                 string error = e.ToString();
-                if (error.Contains("time"))
-                {
-                    ErrorString = "You are having a timeout exception";
-
-                }
+                
                 if (error.Contains("NetWork.Strem"))
                 {
                     ErrorString = "You cannot move steer before connecting to server";
@@ -350,6 +398,10 @@ namespace flightGear.models
             {
                 ErrorString = "Beware! you aren't connected to the server yet";
             }
+
+            
+
+
             //catch(ObjectDisposedException e)
             //{
             //    ErrorString = "Exception: object";
@@ -361,6 +413,7 @@ namespace flightGear.models
         public void setClient(ITelnetClient client)
         {
             telnetClient = client;
+            stop = false;
         }
     }
 }

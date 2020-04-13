@@ -50,7 +50,7 @@ namespace flightGear.models
                 tcpclnt.Connect(ip, port);
 
                 Console.WriteLine("Connected");
-                //tcpclnt.ReceiveTimeout = 10000;
+                tcpclnt.ReceiveTimeout = 10000;
                 this.stream = tcpclnt.GetStream();
 
             }
@@ -62,16 +62,7 @@ namespace flightGear.models
             }
 
 
-            //catch (ArgumentNullException e)
-            //{
-            //    Console.WriteLine("ArgumentNullException: {0}", e);
-            //    ErrorString = "Exception: " + e;
-            //}
-            //catch (SocketException e)
-            //{
-            //    Console.WriteLine("SocketException: {0}", e);
-            //    ErrorString = "Exception: " + e;
-            //}
+           
 
         }
 
@@ -97,8 +88,8 @@ namespace flightGear.models
             }
             catch(IOException e)
             {
-                
-                throw e;
+
+                throw new TimeoutException();
             }
            
         }
@@ -119,7 +110,7 @@ namespace flightGear.models
             }
             catch (IOException e)
             {
-                throw e;
+                throw  new TimeoutException();
 
             }
             catch (NullReferenceException e)

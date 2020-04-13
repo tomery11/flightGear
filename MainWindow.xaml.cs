@@ -16,7 +16,7 @@ namespace flightGear
     {
         FlightGearViewModel vm;
         private IFlightGearModel model;
-        private bool connected;
+        //private bool connected;
 
         public MainWindow()
         {
@@ -28,19 +28,25 @@ namespace flightGear
 
             this.model = new MyDashboardModel(null);
             vm = new FlightGearViewModel(this.model);
-            SteerVM steerVM = new SteerVM(this.model);
-            MapVM mapVM = new MapVM(this.model);
+            //SteerVM steerVM = new SteerVM(this.model);
+            //MapVM mapVM = new MapVM(this.model);
 
-            //mapUC.DataContext = mapVM;
-            steerUC.DataContext = steerVM;
-            DataContext = vm;
+            ////mapUC.DataContext = mapVM;
+            //steerUC.DataContext = steerVM;
+            //DataContext = vm;
 
             vm.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == "VM_ErrorString")
                 {
-                    errorWindow.Content = vm.VM_ErrorString;
-                    errorArea.Background = Brushes.Red;
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        errorWindow.Content = vm.VM_ErrorString;
+                        errorArea.Background = Brushes.Red;
+                    });
+
+                    
+                    
                 }
                 if (e.PropertyName == "VM_Connected")
                 {
@@ -51,7 +57,7 @@ namespace flightGear
                         elipseConnectionStatus.Fill = Brushes.Green;
                         errorWindow.Content = "";
                         errorArea.Background = Brushes.Transparent;
-                        connected = true;
+                        //connected = true;
                     }
                     if(vm.VM_Connected == false)
                     {
@@ -59,7 +65,7 @@ namespace flightGear
                         connectionStatus.Foreground = Brushes.Red;
                         elipseConnectionStatus.Fill = Brushes.Red;
 
-                        connected = false;
+                        //connected = false;
                     }
                 }
                 
@@ -70,7 +76,7 @@ namespace flightGear
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!connected)
+            if (!vm.VM_Connected)
             {
                 string ip = ipTextBox.Text;
                 int port = Int32.Parse(portTextBox.Text);
@@ -82,8 +88,15 @@ namespace flightGear
                 else
                 {
                     model.setClient(new MyTelnetClient());
-                    vm.connect(ip, port);
                     
+                    vm.connect(ip, port);
+                    SteerVM steerVM = new SteerVM(this.model);
+                    //MapVM mapVM = new MapVM(this.model);
+                    vm = new FlightGearViewModel(this.model);
+                    //mapUC.DataContext = mapVM;
+                    steerUC.DataContext = steerVM;
+                    DataContext = vm;
+
 
 
 
@@ -104,12 +117,7 @@ namespace flightGear
 
         private void disconnectButton_Click(object sender, RoutedEventArgs e)
         {
-
             vm.disconnect();
-            
-
-
-
         }
 
     }

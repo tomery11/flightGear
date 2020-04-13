@@ -16,5 +16,9 @@ namespace flightGear
     public partial class App : Application
     {
        
+        //public FlightGearViewModel FlightGearViewModel { get; internal set; }
+
+
+
     }
 }
